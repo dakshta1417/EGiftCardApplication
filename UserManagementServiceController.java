@@ -31,11 +31,9 @@ public class UserManagementServiceController {
 	private IUserManagementService userServiceCtrl;
 	
 	//http://localhost:8080/EGiftCardApp/api
-	//@SuppressWarnings({ "unchecked", "rawtypes" })
 	@GetMapping(value="/getUser",produces="application/json")
 	public ResponseEntity<List<User>> getAllUsers() throws NoDataException
 {
-		System.out.println("Inside getAllUser controller");
 		List<User> user= userServiceCtrl.getAllUsers();	
 		
 			return new ResponseEntity<List<User>> (user,HttpStatus.OK);		
@@ -45,11 +43,11 @@ public class UserManagementServiceController {
 	@GetMapping("/Id/{userId}")
 	public ResponseEntity<User> getUserById(@PathVariable("userId") int userId) throws NoSuchUserException 
 {
-		System.out.println("Inside get user controller");
 		User user=userServiceCtrl.getUserById(userId);
 		
 	return new ResponseEntity<User> (user, HttpStatus.OK);	
 }
+	
 	//http://localhost:8080/EGiftCardApp/api/firstName/Jack
 	@GetMapping("/firstName/{firstName}")
 	public ResponseEntity<User> searchByFirstName(@PathVariable("firstName") String firstName)
@@ -69,7 +67,6 @@ public class UserManagementServiceController {
 	@PutMapping(value="/Update/{userId}",consumes="application/json", produces="application/json")
 	public  ResponseEntity<User> UpdateUserById(@Valid @RequestBody User user,@PathVariable("userId") int userId) throws NoSuchUserException
 	{
-		System.out.println("Record updated successfully");
 		return new ResponseEntity<User>(userServiceCtrl.UpdateUserById(user, userId),HttpStatus.OK);
 	}
 	
@@ -83,9 +80,7 @@ public class UserManagementServiceController {
 	//http://localhost:8080/EGiftCardApp/api/postUser
 	@PostMapping(value="/postUser",consumes="application/json", produces="application/json")
 	public ResponseEntity<User> RegisterUser(@Valid @RequestBody User user) throws InvalidUserIdException
-	{
-		System.out.println("Inside ctrl register user method");	
-		
+	{	
 		return new ResponseEntity<User>(userServiceCtrl.RegisterUser(user),HttpStatus.CREATED);
 	}
 	
@@ -93,7 +88,6 @@ public class UserManagementServiceController {
 	@DeleteMapping("/delete/{userId}")
 	public ResponseEntity<String> deleteUserById(@PathVariable("userId") int userId) throws NoDataException
 	{
-		System.out.println("Delete user by id method...at work");
 		if(userId==0)
 			throw new NoDataException("data not available");
 			else
