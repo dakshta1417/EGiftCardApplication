@@ -22,11 +22,9 @@ public class UserManagementServiceImpl implements IUserManagementService{
 	@Override
 	public List<User> getAllUsers() throws NoDataException
 	{
-	System.out.println("Inside service of get all users method");
 	
 	if(userManage.findAll().isEmpty())
 	{
-		System.out.println("Inside if block");
 		throw new NoDataException("DATA NOT AVAILABLE!");
 	}
 		return userManage.findAll();
@@ -35,11 +33,8 @@ public class UserManagementServiceImpl implements IUserManagementService{
 	@Override
 	public User getUserById(int userId) throws NoSuchUserException 
 	{
-		System.out.println("Inside service of get user by id method");
 		Optional<User> user=userManage.findById(userId);
-	//	System.out.println(user.get()+"after 39");
 		if(!user.isPresent())
-		//if(!(listUser.contains(user.get())))
 		{
 			throw new NoSuchUserException("No user present with user id " + userId);
 		}
@@ -49,18 +44,19 @@ public class UserManagementServiceImpl implements IUserManagementService{
 	@Override
 	public User RegisterUser(User user) throws InvalidUserIdException
 	{
-		System.out.println("Inside service of register user method");	
+
 		Optional<User> user1=userManage.findById(user.getUserId());
 		if(user1.isPresent())
 			throw new InvalidUserIdException("Enter correct user ID as User ID "+ user.getUserId() +" already exists");
 		else
-		return userManage.save(user);
+		{
+			return userManage.save(user);
+		}
 	}
 
 	@Override
 	public User UpdateUserById(User user,int userId) throws NoSuchUserException 
 	{
-		System.out.println("Inside update user by id method");
 		User preUser=userManage.findById(userId).orElse(null);
 		
 		if(preUser==null) 
@@ -79,14 +75,11 @@ public class UserManagementServiceImpl implements IUserManagementService{
 		}
 		
 	}
-		//return userManage.saveAndFlush(userManage.findById(userId));
-	
 
-	
 	@Override
 	public String deleteUserById(int userId) throws NoDataException 
 	{
-		System.out.println("Inside delete user by id method");
+
 		Optional<User> user=userManage.findById(userId);
 		if(user.isPresent())
 		{
@@ -101,7 +94,7 @@ public class UserManagementServiceImpl implements IUserManagementService{
 		@Override
 		public User changePassword(User user, String email) throws NoSuchUserException
 		{
-			System.out.println("Inside change password service layer");
+		
 			User preUser=userManage.findByEmail(email);
 			if(preUser==null)
 			{
@@ -115,17 +108,14 @@ public class UserManagementServiceImpl implements IUserManagementService{
 		@Override
 		public User SearchByFirstName(String firstName)
 		{
-			System.out.println("Searching user by first name");
-			User user=userManage.findByFirstName(firstName);
-			return user;
+			return userManage.findByFirstName(firstName);
 		}
 
 		@Override
-		public User getUserByEmail(String email) {
+		public User getUserByEmail(String email) 
+		{
 			
-			System.out.println("searching user by email");
-			User user=userManage.findByEmail(email);
-			return user;
+			return userManage.findByEmail(email);
 		}
 
 
