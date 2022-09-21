@@ -53,7 +53,7 @@ public class UserManagementServiceController {
 	public ResponseEntity<User> searchByFirstName(@PathVariable("firstName") String firstName)
 	{
 		
-		return new ResponseEntity<User> (userServiceCtrl.SearchByFirstName(firstName),HttpStatus.FOUND);
+		return new ResponseEntity<User> (userServiceCtrl.searchByFirstName(firstName),HttpStatus.FOUND);
 	}
 	
 	//http://localhost:8080/EGiftCardApp/api/Email/
@@ -65,9 +65,9 @@ public class UserManagementServiceController {
 	
 	//http://localhost:8080/EGiftCardApp/api/Update
 	@PutMapping(value="/Update/{userId}",consumes="application/json", produces="application/json")
-	public  ResponseEntity<User> UpdateUserById(@Valid @RequestBody User user,@PathVariable("userId") int userId) throws NoSuchUserException
+	public  ResponseEntity<User> updateUserById(@Valid @RequestBody User user,@PathVariable("userId") int userId) throws NoSuchUserException
 	{
-		return new ResponseEntity<User>(userServiceCtrl.UpdateUserById(user, userId),HttpStatus.OK);
+		return new ResponseEntity<User>(userServiceCtrl.updateUserById(user, userId),HttpStatus.OK);
 	}
 	
 	//http://localhost:8080/EGiftCardApp/api/forgetPassword/
@@ -79,9 +79,9 @@ public class UserManagementServiceController {
 
 	//http://localhost:8080/EGiftCardApp/api/postUser
 	@PostMapping(value="/postUser",consumes="application/json", produces="application/json")
-	public ResponseEntity<User> RegisterUser(@Valid @RequestBody User user) throws InvalidUserIdException
+	public ResponseEntity<User> registerUser(@Valid @RequestBody User user) throws InvalidUserIdException
 	{	
-		return new ResponseEntity<User>(userServiceCtrl.RegisterUser(user),HttpStatus.CREATED);
+		return new ResponseEntity<User>(userServiceCtrl.registerUser(user),HttpStatus.CREATED);
 	}
 	
 	//http://localhost:8080/EGiftCardApp/api/delete
