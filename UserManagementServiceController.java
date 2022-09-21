@@ -32,19 +32,17 @@ public class UserManagementServiceController {
 	
 	//http://localhost:8080/EGiftCardApp/api
 	//@SuppressWarnings({ "unchecked", "rawtypes" })
-	@GetMapping(produces="application/json")
+	@GetMapping(value="/getUser",produces="application/json")
 	public ResponseEntity<List<User>> getAllUsers() throws NoDataException
 {
 		System.out.println("Inside getAllUser controller");
 		List<User> user= userServiceCtrl.getAllUsers();	
-		//if(user.isEmpty())
-		
-			//return new ResponseEntity ("Sorry! Please insert users to view",HttpStatus.NOT_FOUND);
 		
 			return new ResponseEntity<List<User>> (user,HttpStatus.OK);		
 }
 
-	@GetMapping("/{userId}")
+	//http://localhost:8080/EGiftCardApp/api/Id
+	@GetMapping("/Id/{userId}")
 	public ResponseEntity<User> getUserById(@PathVariable("userId") int userId) throws NoSuchUserException 
 {
 		System.out.println("Inside get user controller");
@@ -67,13 +65,10 @@ public class UserManagementServiceController {
 		return new ResponseEntity<User> (userServiceCtrl.getUserByEmail(email),HttpStatus.FOUND);
 	}
 	
-
-	@PutMapping(value="/{userId}",consumes="application/json", produces="application/json")
+	//http://localhost:8080/EGiftCardApp/api/Update
+	@PutMapping(value="/Update/{userId}",consumes="application/json", produces="application/json")
 	public  ResponseEntity<User> UpdateUserById(@Valid @RequestBody User user,@PathVariable("userId") int userId) throws NoSuchUserException
 	{
-		System.out.println("Inside ctrl update user by id");
-		//User user=userServiceCtrl.getUserById(userId);
-		//User postUser=userServiceCtrl.UpdateUserById(user, userId);
 		System.out.println("Record updated successfully");
 		return new ResponseEntity<User>(userServiceCtrl.UpdateUserById(user, userId),HttpStatus.OK);
 	}
@@ -85,7 +80,8 @@ public class UserManagementServiceController {
 		return new ResponseEntity<User>(userServiceCtrl.changePassword(user, email),HttpStatus.NOT_FOUND);
 	}
 
-	@PostMapping(consumes="application/json", produces="application/json")
+	//http://localhost:8080/EGiftCardApp/api/postUser
+	@PostMapping(value="/postUser",consumes="application/json", produces="application/json")
 	public ResponseEntity<User> RegisterUser(@Valid @RequestBody User user) throws InvalidUserIdException
 	{
 		System.out.println("Inside ctrl register user method");	
@@ -93,11 +89,11 @@ public class UserManagementServiceController {
 		return new ResponseEntity<User>(userServiceCtrl.RegisterUser(user),HttpStatus.CREATED);
 	}
 	
-	
-	@DeleteMapping("/{userId}")
+	//http://localhost:8080/EGiftCardApp/api/delete
+	@DeleteMapping("/delete/{userId}")
 	public ResponseEntity<String> deleteUserById(@PathVariable("userId") int userId) throws NoDataException
 	{
-		System.out.println("Inside delete user by id method");
+		System.out.println("Delete user by id method...at work");
 		if(userId==0)
 			throw new NoDataException("data not available");
 			else
