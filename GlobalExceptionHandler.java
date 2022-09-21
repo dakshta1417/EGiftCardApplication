@@ -23,8 +23,7 @@ public class GlobalExceptionHandler {
 		response.setErrorMessage(e.getMessage());
 		response.setErrorCode("CONFLICT");
 		response.setTimeStamp(LocalDateTime.now());
-		ResponseEntity<ExceptionResponse> responseEntity=new ResponseEntity<ExceptionResponse>(response,HttpStatus.CONFLICT);
-		return responseEntity;
+		return new ResponseEntity<ExceptionResponse>(response,HttpStatus.CONFLICT);
 		
 	}
 	
@@ -35,8 +34,7 @@ public class GlobalExceptionHandler {
 		response.setErrorMessage(e.getMessage());
 		response.setErrorCode("IM_USED");
 		response.setTimeStamp(LocalDateTime.now());
-		ResponseEntity<ExceptionResponse> responseEntity=new ResponseEntity<ExceptionResponse>(response,HttpStatus.IM_USED);
-		return responseEntity;
+		return new ResponseEntity<ExceptionResponse>(response,HttpStatus.IM_USED);
 	}
 
 	@ExceptionHandler(NoDataException.class)
@@ -46,8 +44,7 @@ public class GlobalExceptionHandler {
 		response.setErrorMessage(e.getMessage());
 		response.setErrorCode("GONE");
 		response.setTimeStamp(LocalDateTime.now());
-		ResponseEntity<ExceptionResponse> responseEntity=new ResponseEntity<ExceptionResponse>(response,HttpStatus.GONE);
-		return responseEntity;
+		return new ResponseEntity<ExceptionResponse>(response,HttpStatus.GONE);
 	}
 	
 	
@@ -63,18 +60,5 @@ public class GlobalExceptionHandler {
 	 });
 	    return new ResponseEntity<Map<String, String>>(errors,HttpStatus.NOT_ACCEPTABLE);
 	}
-	
-	/*@ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
-	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public ResponseEntity<ExceptionResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException e)
-	{
-		ExceptionResponse response=new ExceptionResponse();
-		response.setErrorMessage(e.getMessage());
-		response.setErrorCode("Not Acceptable");
-		response.setTimeStamp(LocalDateTime.now());
-		ResponseEntity<ExceptionResponse> responseEntity=new ResponseEntity<ExceptionResponse>(response,HttpStatus.NOT_ACCEPTABLE);
-		return responseEntity;
-	}*/
-	
 
 }
