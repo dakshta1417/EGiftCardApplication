@@ -42,7 +42,7 @@ public class UserManagementServiceImpl implements IUserManagementService{
 	}
 	
 	@Override
-	public User RegisterUser(User user) throws InvalidUserIdException
+	public User registerUser(User user) throws InvalidUserIdException
 	{
 
 		Optional<User> user1=userManage.findById(user.getUserId());
@@ -55,7 +55,7 @@ public class UserManagementServiceImpl implements IUserManagementService{
 	}
 
 	@Override
-	public User UpdateUserById(User user,int userId) throws NoSuchUserException 
+	public User updateUserById(User user,int userId) throws NoSuchUserException 
 	{
 		User preUser=userManage.findById(userId).orElse(null);
 		
@@ -106,7 +106,7 @@ public class UserManagementServiceImpl implements IUserManagementService{
 		}
 
 		@Override
-		public User SearchByFirstName(String firstName)
+		public User searchByFirstName(String firstName)
 		{
 			return userManage.findByFirstName(firstName);
 		}
