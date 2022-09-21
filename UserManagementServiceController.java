@@ -30,8 +30,8 @@ public class UserManagementServiceController {
 	@Autowired
 	private IUserManagementService userServiceCtrl;
 	
-	//http://localhost:8080/EGiftCardApp/api
-	@GetMapping(value="/getUser",produces="application/json")
+	//http://localhost:8080/EGiftCardApp/api/getAllUser
+	@GetMapping(value="/getAllUser",produces="application/json")
 	public ResponseEntity<List<User>> getAllUsers() throws NoDataException
 {
 		List<User> user= userServiceCtrl.getAllUsers();	
